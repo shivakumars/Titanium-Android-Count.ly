@@ -23,6 +23,7 @@ Please note that this Module is under development.
     &lt;/intent-filter&gt;
 &lt;/service&gt;</pre>
 
+
 ###2. Now it's time to add Countly Module to your project using steps below:
 
 * Include the Module in TiApp.xml and
