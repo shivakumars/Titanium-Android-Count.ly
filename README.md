@@ -14,6 +14,8 @@ Please note that this Module is under development.
 
 ###1. Add this to your manifest:
 
+* Add this into Android Manifest.
+
 <pre class="prettyprint">
 &lt;service android:name=&quot;org.openudid.OpenUDID_service&quot;&gt;
     &lt;intent-filter&gt;
