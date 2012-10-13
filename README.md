@@ -23,8 +23,8 @@ Please note that this Module is under development.
 
 ###2. Now it's time to add Countly Module to your project using steps below:
 
-* Add Count.ly Module to your Project
-* And do the following,
+* Add Count.ly Module to your Project.
+* And do the following.
 <pre class="prettyprint">
 var countly = require('ly.count');
 Ti.API.info("module is => " + countly);
