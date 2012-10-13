@@ -23,7 +23,7 @@ Please note that this Module is under development.
 
 ###2. Now it's time to add Countly Module to your project using steps below:
 
-Include the Module in TiApp.xml and
+* Include the Module in TiApp.xml and
 
 <pre class="prettyprint">
 var countly = require('ly.count');
