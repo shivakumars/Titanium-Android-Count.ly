@@ -1,0 +1,16 @@
+%define lookup-function-name lookupGeneratedInit
+%define class-name CountlyBindings
+%{
+
+#include <string.h>
+#include <v8.h>
+#include <KrollBindings.h>
+
+#include "ly.count.CountlyModule.h"
+
+
+%}
+struct titanium::bindings::BindEntry;
+%%
+ly.count.CountlyModule, ::ly::count::CountlyModule::bindProxy, ::ly::count::CountlyModule::dispose
+%%
