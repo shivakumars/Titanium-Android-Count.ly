@@ -29,6 +29,8 @@ public:
 
 private:
 	// Methods -----------------------------------------------------------
+	static v8::Handle<v8::Value> stopCount(const v8::Arguments&);
+	static v8::Handle<v8::Value> sendEvent(const v8::Arguments&);
 	static v8::Handle<v8::Value> countInit(const v8::Arguments&);
 
 	// Dynamic property accessors ----------------------------------------

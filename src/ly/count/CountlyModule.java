@@ -15,10 +15,8 @@ import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
 
-
-@Kroll.module(name="Countly", id="ly.count")
-public class CountlyModule extends KrollModule
-{
+@Kroll.module(name = "Countly", id = "ly.count")
+public class CountlyModule extends KrollModule {
 
 	// Standard Debugging variables
 	private static final String LCAT = "CountlyModule";
@@ -26,28 +24,38 @@ public class CountlyModule extends KrollModule
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant public static final String EXTERNAL_NAME = value;
-	
-	public CountlyModule()
-	{
+
+	public CountlyModule() {
 		super();
 	}
 
 	@Kroll.onAppCreate
-	public static void onAppCreate(TiApplication app)
-	{
+	public static void onAppCreate(TiApplication app) {
 		Log.d(LCAT, "inside onAppCreate");
-		
-		// put module init code that needs to run when the application is created
+
+		// put module init code that needs to run when the application is
+		// created
 	}
 
 	// Methods
 	@Kroll.method
-	public void countInit(String url,String apiKey)
-	{
+	public void countInit(String url, String apiKey) {
 		Log.d(LCAT, "Init called");
-		 Countly.sharedInstance().init(TiApplication.getAppCurrentActivity(), url, apiKey);
-		 Countly.sharedInstance().onStart();
+		Countly.sharedInstance().init(TiApplication.getAppCurrentActivity(),
+				url, apiKey);
+		Countly.sharedInstance().onStart();
+	}
+
+	@Kroll.method
+	public void stopCount() {
+		Log.d(LCAT, "Stop Count called");
+		Countly.sharedInstance().onStop();
+	}
+
+	@Kroll.method
+	public void sendEvent(String key, int count) {
+		Log.d(LCAT, "Event Send called");
+		Countly.sharedInstance().recordEvent(key, count);
 	}
 
 }
-

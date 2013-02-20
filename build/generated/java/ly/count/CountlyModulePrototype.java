@@ -89,6 +89,49 @@ public class CountlyModulePrototype extends KrollModulePrototype
 	}
 
 	// Methods
+	public void stopCount(Context context, Scriptable thisObj, Object[] args)
+	{
+		if (DBG) {
+			Log.d(TAG, "stopCount()");
+		}
+
+		try {
+		CountlyModule proxy = (CountlyModule) ((Proxy) thisObj).getProxy();
+
+		proxy.stopCount();
+	
+
+		} catch (Throwable throwable) {
+			Context.throwAsScriptRuntimeEx(throwable);
+			
+		}
+	}
+
+	public void sendEvent(Context context, Scriptable thisObj, Object[] args)
+	{
+		if (DBG) {
+			Log.d(TAG, "sendEvent()");
+		}
+
+		try {
+		CountlyModule proxy = (CountlyModule) ((Proxy) thisObj).getProxy();
+		if (args.length < 2) {
+			throw new IllegalArgumentException("sendEvent: Invalid number of arguments. Expected 2 but got " + args.length);
+		}
+		java.lang.String arg0;
+		arg0 = (java.lang.String) TypeConverter.jsObjectToJavaString(args[0], thisObj) ;
+		int arg1;
+		arg1 = (int) TypeConverter.jsObjectToJavaInt(args[1], thisObj) ;
+
+		proxy.sendEvent(arg0, arg1);
+	
+
+		} catch (Throwable throwable) {
+			Context.throwAsScriptRuntimeEx(throwable);
+			
+		}
+	}
+
 	public void countInit(Context context, Scriptable thisObj, Object[] args)
 	{
 		if (DBG) {
@@ -124,11 +167,13 @@ public class CountlyModulePrototype extends KrollModulePrototype
 		Id_constructor = 1
 ,		// Property IDs
 		// Method IDs
-		Id_countInit = 2
+		Id_stopCount = 2,
+		Id_sendEvent = 3,
+		Id_countInit = 4
 ;
 		
 
-	public static final int MAX_PROTOTYPE_ID = 2;
+	public static final int MAX_PROTOTYPE_ID = 4;
 
 	protected int getMaxPrototypeId()
 	{
@@ -139,10 +184,15 @@ public class CountlyModulePrototype extends KrollModulePrototype
 	protected int findPrototypeId(String s)
 	{
 		int id = 0;
-// #generated# Last update: 2012-10-13 15:49:05 GMT+05:30
-        L0: { id = 0; String X = null;
+// #generated# Last update: 2013-02-15 16:16:57 GMT+05:30
+        L0: { id = 0; String X = null; int c;
             int s_length = s.length();
-            if (s_length==9) { X="countInit";id=Id_countInit; }
+            if (s_length==9) {
+                c=s.charAt(1);
+                if (c=='e') { X="sendEvent";id=Id_sendEvent; }
+                else if (c=='o') { X="countInit";id=Id_countInit; }
+                else if (c=='t') { X="stopCount";id=Id_stopCount; }
+            }
             else if (s_length==11) { X="constructor";id=Id_constructor; }
             if (X!=null && X!=s && !X.equals(s)) id = 0;
             break L0;
@@ -162,6 +212,14 @@ public class CountlyModulePrototype extends KrollModulePrototype
 			case Id_constructor:
 				arity = 0;
 				name = "constructor";
+				break;
+			case Id_stopCount:
+				arity = 0;
+				name = "stopCount";
+				break;
+			case Id_sendEvent:
+				arity = 2;
+				name = "sendEvent";
 				break;
 			case Id_countInit:
 				arity = 2;
@@ -191,6 +249,12 @@ public class CountlyModulePrototype extends KrollModulePrototype
 		switch (id) {
 			case Id_constructor:
 				return jsConstructor(scope, args);
+			case Id_stopCount:
+				 stopCount(cx, thisObj, args);
+				return Undefined.instance;
+			case Id_sendEvent:
+				 sendEvent(cx, thisObj, args);
+				return Undefined.instance;
 			case Id_countInit:
 				 countInit(cx, thisObj, args);
 				return Undefined.instance;
