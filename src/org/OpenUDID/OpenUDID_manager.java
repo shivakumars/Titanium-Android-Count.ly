@@ -44,7 +44,8 @@ public class OpenUDID_manager implements ServiceConnection{
 		mReceivedOpenUDIDs = new HashMap<String, Integer>();
 	}
 	
-	public void onServiceConnected(ComponentName className, IBinder service) {
+	@Override
+  	public void onServiceConnected(ComponentName className, IBinder service) {
 		//Get the OpenUDID from the remote service
 		try {
 			//Send a random number to the service
@@ -69,6 +70,7 @@ public class OpenUDID_manager implements ServiceConnection{
 		startService(); //Try the next one
   	}
 	
+	@Override
 	public void onServiceDisconnected(ComponentName className) {}
 	
 	private void storeOpenUDID() {
@@ -102,8 +104,13 @@ public class OpenUDID_manager implements ServiceConnection{
 			final ServiceInfo servInfo = mMatchingIntents.get(0).serviceInfo;
             final Intent i = new Intent();
             i.setComponent(new ComponentName(servInfo.applicationInfo.packageName, servInfo.name));
-            mContext.bindService(i, this,  Context.BIND_AUTO_CREATE);
             mMatchingIntents.remove(0);
+            try	{	// try added by Lionscribe
+            	mContext.bindService(i, this,  Context.BIND_AUTO_CREATE);
+            }
+            catch (SecurityException e) {
+                startService();	// ignore this one, and start next one
+            }
 		} else { //No more service to test
 			
 			getMostFrequentOpenUDID(); //Choose the most frequent
