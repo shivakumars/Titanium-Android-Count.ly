@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:module xmlns:ti="http://ti.appcelerator.org" xmlns:android="http://schemas.android.com/apk/res/android">
-	<!--
-		Similar to tiapp.xml, but contains module/platform specific
-		configuration in <iphone>, <android>, and <mobileweb> sections
-	-->
 	<iphone>
 	</iphone>
 	<android xmlns:android="http://schemas.android.com/apk/res/android">
+		<manifest>
+			<!-- START COUNT.LY PERMISSIONS SECTION-->
+	        <uses-permission android:name="android.permission.INTERNET"/>
+	        <!-- END COUNT.LY PERMISSIONS SECTION-->
+	        <!-- START - Application SECTION -->
+	        <application>
+				<service android:name="org.openudid.OpenUDID_service">
+					<intent-filter>
+						<action android:name="org.openudid.GETUDID" />
+					</intent-filter>
+				</service>
+			</application>
+	        <!-- END - Application SECTION -->
+		</manifest>	
 	</android>
 	<mobileweb>
 	</mobileweb>
