@@ -8,6 +8,8 @@
  */
 package ly.count;
 
+import java.util.HashMap;
+
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 
@@ -57,5 +59,13 @@ public class CountlyModule extends KrollModule {
 		Log.d(LCAT, "Event Send called");
 		Countly.sharedInstance().recordEvent(key, count);
 	}
-
+	
+	@Kroll.method
+	public void sendAdvancedEvent(String key, Object segmentationPassed, int count) {
+		Log.d(LCAT, "Advanced Event Send called");
+		
+		HashMap<String, String> segmentation = (HashMap<String, String>) segmentationPassed;
+		
+		Countly.sharedInstance().recordEvent(key, segmentation, count);
+	}
 }
