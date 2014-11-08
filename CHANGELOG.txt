@@ -7,3 +7,11 @@ Basic Countly Implementation
 Version 0.2
 ------------------------
 Fixed Security Exception(By Chaning to latest OpenUDID Code)
+
+
+Version 0.3
+------------------------
+Added Android Manifest Entries - Allows Automatic Entry Adding into AndroidManifest.xml
+Added sendAdvancedEvent function to Module to allow Events with Segmentations to be sent
+Updated Readme
+Added Event Count and Database Connection Patch

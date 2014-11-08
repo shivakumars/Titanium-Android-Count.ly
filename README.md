@@ -1,37 +1,70 @@
-Titanium-Android-Count.ly
-=========================
+# Titanium-Android-Count.ly
 
-Count.ly SDK for Titanium Android
+Countly is an innovative, real-time, open source mobile analytics application. It collects data from mobile phones, and visualizes this information to analyze mobile application usage and end-user behavior. There are two parts of Countly: the server that collects and analyzes data, and mobile SDK that sends this data (for iOS & Android).
 
-##What's Countly?
-##Home
+Countly Server;
 
-[http://count.ly](http://count.ly "Countly")
+- [Countly Server (countly-server)](https://github.com/Countly/countly-server)
 
-##Installation
+Other Countly SDK repositories;
 
-Please note that this Module is under development.
+- [Countly Android SDK (countly-sdk-android)](https://github.com/Countly/countly-sdk-android)
+- [Countly iOS SDK (countly-sdk-ios)](https://github.com/Countly/countly-sdk-ios)
 
-###1. Add this to your manifest:
+## Please note that this Module is under development.
 
-* Add this into Android Manifest.
+## Installation
 
-<pre class="prettyprint">
-&lt;service android:name=&quot;org.openudid.OpenUDID_service&quot;&gt;
-    &lt;intent-filter&gt;
-        &lt;action android:name=&quot;org.openudid.GETUDID&quot; /&gt;
-    &lt;/intent-filter&gt;
-&lt;/service&gt;</pre>
+### Register your module with your application by editing `tiapp.xml` and adding your module.
 
-###2. Now it's time to add Countly Module to your project using steps below:
+```
+<modules>
+<module platform="android">ly.count</module>
+</modules>
+```
 
-* Include the Module in TiApp.xml and
+## Usage
 
-<pre class="prettyprint">
-var countly = require(&quot;ly.count&quot;);
-Ti.API.info("module is =&gt; " + countly);
+### Start Count.ly
 
-if (Ti.Platform.name == &quot;android&quot;) {
-  countly.countInit(&quot;http://YOURSERVER&quot;,&quot;API_KEY&quot;);
-}
-</pre>Additionally, make sure that *INTERNET* permission is set if there's none in your manifest file.
+**Start Tracking**
+
+```
+var countly = require('ly.count');
+countly.countInit("http://YOURSERVER","API_KEY");
+```
+
+### Record Events
+
+**Fields**
+
+- name : Name of the event to track
+- _(example - Track clicks on the help button "clickedHelp" )_
+- count : Number to increment the event in the db
+- _(example - User purchases item increment by 1 )_
+- segmentation : Categorization of the event
+- _(example - User is from USA and uses an iPhone 4S so the segmentation will be {device:"iPhone 4S", country:"USA"} )_
+
+**Simple Event**
+
+```
+
+//Example: countly.sendEvent(name,count);
+
+countly.sendEvent("HomeButton",1);
+
+```
+
+**Event With Segmentation**
+
+```
+
+// Example: countly.sendAdvancedEvent(name, segmentation, count);
+
+var segmentation = {"buttonName": "HomeButton",
+"buttonLocation": "TopBar",
+};
+
+countly.sendAdvancedEvent("HomeScreen", segmentation, 1);
+
+```
