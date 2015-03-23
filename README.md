@@ -1,4 +1,6 @@
-# Titanium-Android-Count.ly
+# Titanium-Android-Count.ly(old version)
+
+For new version of the module, Please [click here](https://github.com/dieskim/Count.ly-Titanium-Android)
 
 Countly is an innovative, real-time, open source mobile analytics application. It collects data from mobile phones, and visualizes this information to analyze mobile application usage and end-user behavior. There are two parts of Countly: the server that collects and analyzes data, and mobile SDK that sends this data (for iOS & Android).
 
